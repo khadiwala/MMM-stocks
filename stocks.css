@@ -1,0 +1,10 @@
+.stocks .symbol {
+  padding-left: 0;
+  padding-right: 25px;
+}
+
+.stocks .direction-icon {
+  padding-left: 0px;
+  padding-right: 0px;
+  text-align: right;
+}
