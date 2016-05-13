@@ -31,10 +31,10 @@ module.exports = NodeHelper.create({
     },
 
     socketNotificationReceived: function(notification, payload) {
-        const self = this;
-        if ("symbols" in payload) {
+        if (notification === "LOAD_STOCKS") {
+            const self = this;
             this.get_stock_data(payload["symbols"], function(data) {
-                self.sendSocketNotification("RES", data);
+                self.sendSocketNotification("STOCK_RESULT", data);
             });
         }
     }

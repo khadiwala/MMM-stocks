@@ -9,17 +9,19 @@ Module.register("stocks",{
     start : function() {
         this.loaded = false;
         this.stockInfo = [];
-        this.sendSocketNotification("LOAD", {symbols: this.config.symbols});
+        this.sendSocketNotification("LOAD_STOCKS", {symbols: this.config.symbols});
         self = this;
         setInterval(function() {
-            self.sendSocketNotification("LOAD", {symbols: self.config.symbols})
+            self.sendSocketNotification("LOAD_STOCKS", {symbols: self.config.symbols})
         }, this.config.fetchInterval);
     },
 
     socketNotificationReceived : function(notification, payload) {
-        this.stockInfo = payload
-        this.loaded = true;
-        this.updateDom(3000);
+        if (notification === "STOCK_RESULT") {
+            this.stockInfo = payload
+            this.loaded = true;
+            this.updateDom(3000);
+        }
     },
 
     getStyles: function() {
