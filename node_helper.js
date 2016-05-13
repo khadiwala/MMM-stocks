@@ -32,8 +32,10 @@ module.exports = NodeHelper.create({
 
     socketNotificationReceived: function(notification, payload) {
         const self = this;
-        this.get_stock_data(payload["symbols"], function(data) {
-            self.sendSocketNotification("RES", data);
-        });
+        if ("symbols" in payload) {
+            this.get_stock_data(payload["symbols"], function(data) {
+                self.sendSocketNotification("RES", data);
+            });
+        }
     }
 });
